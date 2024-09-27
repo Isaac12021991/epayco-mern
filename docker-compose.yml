@@ -1,0 +1,61 @@
+networks:
+  host-epayco:
+
+services:
+  mongo:
+    image: mongo:latest # Imagen oficial de MongoDB
+    container_name: mongo # Nombre del contenedor
+    ports:
+      - "27017:27017" # Mapea el puerto 27017 del contenedor al host
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin # Usuario root para MongoDB
+      MONGO_INITDB_ROOT_PASSWORD: password # Contraseña root para MongoDB
+    volumes:
+      - mongo-data:/data/db # Volumen para almacenar los datos de MongoDB
+    networks:
+      - host-epayco
+
+  service-one-db:
+    build:
+      context: ./service-one-db
+      dockerfile: ./Dockerfile
+    restart: always
+    ports:
+      - "3001:3001"
+    depends_on:
+      - mongo
+    volumes:
+      - ./config/service-one-db/.env:/home/service-one-db/.env
+    networks:
+      - host-epayco
+
+  service-two-backend:
+    build:
+      context: ./service-two-backend
+      dockerfile: ./Dockerfile
+    restart: always
+    ports:
+      - "3002:3002"
+    depends_on:
+      - service-one-db
+    volumes:
+     - ./config/service-two-backend/.env:/home/service-two-backend/.env
+    networks:
+      - host-epayco
+
+  service-three-client:
+    build:
+      context: ./service-three-client
+      dockerfile: ./Dockerfile
+    restart: always
+    ports:
+      - "5173:80"
+    volumes:
+     - ./config/service-three-client/axios.js:/home/service-three-client/src/api/axios.js
+    networks:
+      - host-epayco
+
+
+volumes:
+  mongo-data:
+    driver: local # Usa el driver local para el almacenamiento
