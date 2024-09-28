@@ -7,31 +7,13 @@
 	},
 	"item": [
 		{
-			"name": "http://localhost:3002/api/wallet/wallet_load",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"url": {
-					"raw": "http://localhost/register",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"path": [
-						"register"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "http://localhost:3002/api/wallet/wallet_client_check",
+			"name": "Wallet Load",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"document\":\"19227836\",\r\n    \"amount\": 400\r\n}",
+					"raw": "{\r\n    \"document\":\"19227837\",\r\n    \"amount\":7900\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -55,13 +37,13 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:3002/api/shopping/shopping_pay",
+			"name": "Wallet Client Check",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"client_id\":\"66f433e8f5937aae272abbb1\",\r\n    \"amount\": 20\r\n}",
+					"raw": "{\r\n    \"document\":\"19227836\",\r\n    \"amount\": 400\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -69,12 +51,42 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3001/api/shopping/shopping_pay",
+					"raw": "http://localhost:3002/api/wallet/wallet_client_check",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "3001",
+					"port": "3002",
+					"path": [
+						"api",
+						"wallet",
+						"wallet_client_check"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Shopping Pay",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"client_id\":\"66f6e6088a190c04935eb38d\",\r\n    \"amount\": 20\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3002/api/shopping/shopping_pay",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3002",
 					"path": [
 						"api",
 						"shopping",
@@ -85,13 +97,13 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:3002/api/client/login",
+			"name": "Login",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"password\":\"5+5\",\r\n    \"email\": \"456\"\r\n}\r\n",
+					"raw": "{\r\n    \"password\":\"12346\",\r\n    \"email\": \"456\"\r\n}\r\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -115,7 +127,7 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:3002/api/wallet/wallet_client_check Copy 3",
+			"name": "Logout",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -145,13 +157,13 @@
 			"response": []
 		},
 		{
-			"name": "http://localhost:3002/api/wallet/wallet_client_check Copy 4",
+			"name": "Shopping pay confirm",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"password\":\"14516\",\r\n    \"email\": \"i611@gm.com\"\r\n}",
+					"raw": "{\r\n    \"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF9zaG9wcGluZyI6IjY2ZjY0ZjRiMzU3MDJlNzliMTA3MTAzZiIsImNsaWVudF9pZCI6IjY2ZjU3NzMwOTYwNTZiYjIxOGVhNWM1OSIsImFtb3VudCI6NzQwOCwiaWF0IjoxNzI3NDE4MTg3LCJleHAiOjE3Mjc1MDQ1ODd9.1nkl1ZxkSJa5yhp-CA_OHT8RRbno6GytELBxeejpHnk\",\r\n    \"token_client\": \"579402\" \r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -159,7 +171,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3002/api/client/logout",
+					"raw": "http://localhost:3002/api/shopping/shopping_pay_confirm",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -167,8 +179,8 @@
 					"port": "3002",
 					"path": [
 						"api",
-						"client",
-						"logout"
+						"shopping",
+						"shopping_pay_confirm"
 					]
 				}
 			},
